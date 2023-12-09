@@ -28,3 +28,7 @@ cp -r waybar ~/.config/
 
 #Wallpaper setup
 cp wallhaven-q21vkl.jpg ~/Documents/
+
+#Wlogout
+mv ~/.config/wlogout/ ~/.config/wlogout.bak
+cp -r wlogout ~/.config/
