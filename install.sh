@@ -7,8 +7,8 @@ git clone https://github.com/LazyVim/starter ~/.config/nvim
 cp custom.lua ~/.config/nvim/lua/plugins/custom.lua
 
 #Setting up custom Firefox aesthetic
-cp -r chrome /home/yejashi/.mozilla/firefox/xl89q2dc.default-release
-cp user.js /home/yejashi/.mozilla/firefox/xl89q2dc.default-release
+cp -r chrome ~/.mozilla/firefox/xl89q2dc.default-release
+cp user.js ~/.mozilla/firefox/xl89q2dc.default-release
 
 #Kitty config
 mv ~/.config/kitty ~/.config/kitty.bak
