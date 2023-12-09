@@ -52,6 +52,7 @@ window#waybar.hidden {
 #clock,
 #battery,
 #cpu,
+#custom-cpu-temp,
 #memory,
 #disk,
 #temperature,
@@ -95,6 +96,13 @@ window#waybar.hidden {
 #cpu {
   color: #fb958b;
   background-color: #1f2530;
+}
+
+#custom-cpu-temp {
+  border-radius: 9.5px;
+  background-color: #1b242b;
+  padding: 0 10px;
+  color: #ebcb8b;
 }
 
 #memory {

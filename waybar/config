@@ -8,7 +8,7 @@
     "spacing": 5, // Gaps between modules (4px)
     "modules-left": ["custom/launcher", "hyprland/workspaces", "custom/playerctl-previous", "custom/playerctl-play", "custom/playerctl-forward", "custom/spotify"],
     "modules-center": ["clock"],
-    "modules-right": ["cpu", "memory", "custom/weather", "tray", "backlight", "pulseaudio", "network", "battery",  "custom/power-menu"],
+    "modules-right": ["custom/cpu-temp", "cpu", "memory", "custom/weather", "tray", "backlight", "pulseaudio", "network", "battery",  "custom/power-menu"],
     "hyprland/workspaces": {
       "format": "{icon}",
       "on-click": "activate",
@@ -38,7 +38,7 @@
     },
 
     "cpu": {
-      "interval": 10,
+      "interval": 1,
       "format": " {}%",
       "max-length": 10,
       "on-click": "",
@@ -109,11 +109,10 @@
       "return-type": "json",
       "on-click": "xdg-open https://weather.com/en-IN/weather/today/l/a319796a4173829988d68c4e3a5f90c1b6832667ea7aaa201757a1c887ec667a"
     },   
-
    "custom/spotify": {
     "exec": "python3 ~/.config/waybar/scripts/mediaplayer.py --player spotify",
-    "format": "{}  ",
     "return-type": "json",
+    "format": "{} ",
     "on-click": "playerctl play-pause",
     "on-double-click-right": "playerctl next",
     "on-scroll-down": "playerctl previous",
@@ -124,7 +123,7 @@
     }, 
     "custom/launcher": {
         "format": " <span color='#6a92d7'> </span>",
-        "on-click": "rofi -show drun",
+        "on-click": "wlogout --protocol layer-shell -b 5 -T 400 -B 400",
     },
     "custom/playerctl-forward": {
         "format": " <span color='#6a92d7'> </span>",
@@ -138,6 +137,12 @@
         "format": " <span color='#6a92d7'> </span>",
         "format-alt": " <span color='#6a92d7'> </span>",
         "on-click": "playerctl play-pause",
-    } 
+    },
+    "custom/cpu-temp": {
+      "exec": "bash -c ~/.config/waybar/scripts/cpu_temp.sh",
+      "format": "󰔏 {}°F",
+      "max-length": 10,
+      "interval": 10
+    },
 }
 
