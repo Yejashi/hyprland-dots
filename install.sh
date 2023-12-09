@@ -32,3 +32,7 @@ cp wallhaven-q21vkl.jpg ~/Documents/
 #Wlogout
 mv ~/.config/wlogout/ ~/.config/wlogout.bak
 cp -r wlogout ~/.config/
+
+#Neofetch
+mv ~/.config/neofetch/ ~/.config/neofetch.bak
+cp -r neofetch ~/.config
