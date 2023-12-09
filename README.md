@@ -1,5 +1,5 @@
 <p align="center">
 
-<img alt="GitHub Repo stars" src="wallhaven-q21vkl.jpg">
+<img alt="GitHub Repo stars" src="preview.jpg">
 
 </p>
