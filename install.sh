@@ -1,38 +1,60 @@
 #!/usr/bin/env bash
 #
+# hyprland-dots installer
+#
+# Makes this repo the single source of truth: each directory below is
+# symlinked into ~/.config. Safe to re-run — directories that already
+# point here are left alone; any existing real directory is backed up
+# as <name>.bak-<timestamp> before being replaced.
+#
+set -euo pipefail
 
-#Installing lazyvim
-mv ~/.config/nvim ~/.config/nvim.bak
-git clone https://github.com/LazyVim/starter ~/.config/nvim
-cp custom.lua ~/.config/nvim/lua/plugins/custom.lua
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}"
+TS="$(date +%Y%m%d-%H%M%S)"
 
-#Setting up custom Firefox aesthetic
-cp -r chrome ~/.mozilla/firefox/xl89q2dc.default-release
-cp user.js ~/.mozilla/firefox/xl89q2dc.default-release
+# Directories in this repo that are symlinked into ~/.config
+DIRS=(hypr hyprpanel uwsm kitty rofi waybar wlogout ranger neofetch)
 
-#Kitty config
-mv ~/.config/kitty ~/.config/kitty.bak
-cp -r kitty ~/.config/
+mkdir -p "$CONFIG_DIR"
 
-#Ranger
-mv ~/.config/ranger ~/.config/ranger.bak
-cp -r ranger ~/.config/
+for name in "${DIRS[@]}"; do
+    src="$REPO/$name"
+    dst="$CONFIG_DIR/$name"
 
-#Rofi
-mv ~/.config/rofi ~/.config/rofi.bak
-cp -r rofi ~/.config/
+    if [[ ! -d "$src" ]]; then
+        echo "skip    $name (not in repo)"
+        continue
+    fi
 
-#Waybar
-mv ~/.config/waybar/ ~/.config/waybar.bak
-cp -r waybar ~/.config/
+    # Already a symlink pointing at this repo?
+    if [[ -L "$dst" && "$(readlink -f "$dst")" == "$src" ]]; then
+        echo "ok      $name"
+        continue
+    fi
 
-#Wallpaper setup
-cp wallhaven-q21vkl.jpg ~/Documents/
+    if [[ -L "$dst" ]]; then
+        echo "repoint $name (was -> $(readlink "$dst"))"
+        rm "$dst"
+    elif [[ -d "$dst" ]]; then
+        if diff -rq "$src" "$dst" >/dev/null 2>&1; then
+            echo "backup  $name (contents identical)"
+        else
+            echo "backup  $name (contents differ)"
+        fi
+        mv "$dst" "$dst.bak-$TS"
+    fi
 
-#Wlogout
-mv ~/.config/wlogout/ ~/.config/wlogout.bak
-cp -r wlogout ~/.config/
+    ln -s "$src" "$dst"
+    echo "link    $name -> $src"
+done
 
-#Neofetch
-mv ~/.config/neofetch/ ~/.config/neofetch.bak
-cp -r neofetch ~/.config
+# Wallpaper: hypr/hyprland.lua reads it from ~/Documents
+wallpaper="$HOME/Documents/wallhaven-q21vkl.jpg"
+if [[ -f "$REPO/wallhaven-q21vkl.jpg" && ! -f "$wallpaper" ]]; then
+    mkdir -p "$HOME/Documents"
+    cp "$REPO/wallhaven-q21vkl.jpg" "$wallpaper"
+    echo "copy    wallpaper -> $wallpaper"
+fi
+
+echo "done."

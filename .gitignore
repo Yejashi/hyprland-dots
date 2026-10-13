@@ -1,0 +1,8 @@
+# backups / editor junk
+*.bak
+*.bak-*
+*~
+.DS_Store
+
+# session working files
+.agent/

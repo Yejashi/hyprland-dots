@@ -1,0 +1,32 @@
+{
+  "bar.customModules.storage.paths": [
+    "/"
+  ],
+  "scalingPriority": "hyprland",
+  "theme.bar.scaling": 90,
+  "theme.notification.scaling": 90,
+  "theme.osd.scaling": 90,
+  "theme.bar.menus.menu.dashboard.scaling": 90,
+  "theme.bar.menus.menu.dashboard.confirmation_scaling": 90,
+  "theme.bar.menus.menu.media.scaling": 90,
+  "theme.bar.menus.menu.volume.scaling": 90,
+  "theme.bar.menus.menu.network.scaling": 90,
+  "theme.bar.menus.menu.bluetooth.scaling": 90,
+  "theme.bar.menus.menu.battery.scaling": 90,
+  "theme.bar.menus.menu.clock.scaling": 90,
+  "theme.bar.menus.menu.notifications.scaling": 90,
+  "theme.tooltip.scaling": 90,
+  "theme.bar.menus.popover.scaling": 90,
+  "theme.bar.buttons.workspaces.enableBorder": false,
+  "bar.workspaces.show_icons": true,
+  "bar.workspaces.show_numbered": false,
+  "bar.workspaces.workspaceMask": true,
+  "theme.bar.menus.menu.notifications.scrollbar.width": "0.35em",
+  "menus.clock.weather.location": "Knoxville, TN",
+  "menus.clock.weather.interval": 60000,
+  "menus.clock.weather.key": "b6b3067b27d144f186e160726250210",
+  "menus.power.shutdown": "systemctl poweroff",
+  "menus.power.hibernate": "systemctl poweroff",
+  "menus.power.sleep": "systemctl suspend",
+  "menus.clock.weather.enabled": false
+}
