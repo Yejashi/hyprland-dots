@@ -14,7 +14,7 @@ CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}"
 TS="$(date +%Y%m%d-%H%M%S)"
 
 # Directories in this repo that are symlinked into ~/.config
-DIRS=(hypr hyprpanel uwsm kitty rofi waybar wlogout ranger neofetch)
+DIRS=(hypr hyprpanel uwsm kitty rofi wlogout ranger neofetch)
 
 mkdir -p "$CONFIG_DIR"
 

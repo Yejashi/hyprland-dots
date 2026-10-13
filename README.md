@@ -18,15 +18,14 @@ KDE Plasma — sessions are separate (SDDM: `Hyprland`, `Hyprland (uwsm)`,
 
 | Path | What it is |
 |---|---|
-| `hypr/` | Hyprland + hyprlock. **`hyprland.lua` is the live config** — Hyprland ≥ 0.55 loads Lua from `~/.config/hypr/hyprland.lua`; the old `hyprland.conf` syntax is deprecated and no longer read. `hyprlock.conf` is the lockscreen: `hyprlock.png` background, `profile_devil.png` avatar, `Fonts/` (SF Pro Display, JetBrains Mono Nerd), `scripts/songdetail.sh` (current song on the lockscreen), `scripts/kbd-backlight.sh` (Framework 13 keyboard backlight), `mocha.conf` (Catppuccin Mocha palette), `keybind` (rofi keybind dumper, parses `hyprland.lua`), `xdg-portal-hyprland` (portal fixup, run at startup). |
+| `hypr/` | Hyprland + hyprlock. **`hyprland.lua` is the live config** — Hyprland ≥ 0.55 loads Lua from `~/.config/hypr/hyprland.lua`; the old `hyprland.conf` syntax is deprecated and no longer read. `hyprlock.conf` is the lockscreen: `hyprlock.png` background, `profile_devil.png` avatar, `Fonts/` (SF Pro Display), `scripts/songdetail.sh` (current song on the lockscreen), `scripts/kbd-backlight.sh` (Framework 13 keyboard backlight), `keybind` (rofi keybind dumper, parses `hyprland.lua`), `xdg-portal-hyprland` (portal fixup, run at startup). |
 | `hyprpanel/` | Hyprpanel — the active panel (bar, OSD, menus, notifications). |
 | `uwsm/` | Env vars for the `hyprland-uwsm.desktop` session. |
-| `kitty/` | Kitty terminal + kitty-themes. |
+| `kitty/` | Kitty terminal. |
 | `rofi/` | Rofi (Catppuccin Mocha). `.catppuccin-rofi/` is the theme generator. |
-| `waybar/` | Waybar config + scripts (superseded by hyprpanel, kept). |
 | `wlogout/` | Logout menu. |
 | `ranger/`, `neofetch/` | File manager + neofetch (shared with other sessions). |
-| `chrome/`, `user.js` | Firefox theming (userChrome / userContent). |
+| `user.js` | Firefox profile prefs (active profile). |
 | `custom.lua` | LazyVim plugin. |
 | `wallhaven-q21vkl.jpg` | Wallpaper (also kept in `~/Documents`, where `hyprland.lua` reads it). |
 
