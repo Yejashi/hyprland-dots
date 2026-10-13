@@ -24,9 +24,8 @@
   "theme.bar.menus.menu.notifications.scrollbar.width": "0.35em",
   "menus.clock.weather.location": "Knoxville, TN",
   "menus.clock.weather.interval": 60000,
-  "menus.clock.weather.key": "b6b3067b27d144f186e160726250210",
   "menus.power.shutdown": "systemctl poweroff",
-  "menus.power.hibernate": "systemctl poweroff",
+  "menus.power.hibernate": "systemctl hibernate",
   "menus.power.sleep": "systemctl suspend",
   "menus.clock.weather.enabled": false
 }

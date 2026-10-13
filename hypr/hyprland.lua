@@ -1,5 +1,4 @@
 -- Hyprland configuration (Lua format, Hyprland 0.55+)
--- Converted from the previous hyprland.conf. Old file kept as hyprland.conf.bak
 
 -- █▀▀ ▀▄▀ █▀▀ █▀▀
 -- ██▄ █░█ ██▄ █▄▄
@@ -161,12 +160,9 @@ hl.bind("SUPER + F1", hl.dsp.exec_cmd("firefox --private-window"))
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%-"))
 hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("brightnessctl set +5%"))
 
--- Keyboard backlight. These were `code:238` / `code:237` in the old config;
--- Hyprland 0.56.2 does not parse the `code:` prefix in Lua binds (the bind
--- registers with an empty key and never fires), so they use the equivalent
--- keysyms instead: xkb keycode 238 = XF86KbdBrightnessUp, 237 = XF86KbdBrightnessDown.
-hl.bind("XF86KbdBrightnessUp",   hl.dsp.exec_cmd("asusctl -n"))
-hl.bind("XF86KbdBrightnessDown", hl.dsp.exec_cmd("asusctl -p"))
+-- Keyboard backlight (Framework 13: /sys/class/leds/chromeos::kbd_backlight)
+hl.bind("XF86KbdBrightnessUp",   hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/kbd-backlight.sh up"))
+hl.bind("XF86KbdBrightnessDown", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/kbd-backlight.sh down"))
 
 -- █▀▄▀█ █░█ █░░ ▀█▀ █ █▀▄▀█ █▀▀ █▀▄ █ ▄▀█
 -- █░▀░█ █▄█ █▄▄ ░█░ █ █░▀░█ ██▄ █▄▀ █ █▀█
@@ -182,8 +178,9 @@ hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"))
 -- ▄█ █▄▄ █▀▄ ██▄ ██▄ █░▀█ ▄█ █▀█ █▄█ ░█░
 -- local screenshotarea = 'hyprctl keyword animation "fadeOut,0,0,default"; grimblast --notify copysave area; hyprctl keyword animation "fadeOut,1,4,default"'
 -- hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd(screenshotarea))
-hl.bind("Print",       hl.dsp.exec_cmd("grimblast --notify --cursor copysave output"))
-hl.bind("ALT + Print", hl.dsp.exec_cmd("grimblast --notify --cursor copysave screen"))
+hl.bind("Print",        hl.dsp.exec_cmd("grimblast --notify --cursor copysave output"))
+hl.bind("ALT + Print",  hl.dsp.exec_cmd("grimblast --notify --cursor copysave screen"))
+hl.bind("CTRL + Print", hl.dsp.exec_cmd("grimblast --notify --cursor copysave area"))
 
 -- █▀▄▀█ █ █▀ █▀▀
 -- █░▀░█ █ ▄█ █▄▄
@@ -192,7 +189,7 @@ hl.bind("CTRL + ALT + L",    hl.dsp.exec_cmd("hyprlock"))
 hl.bind("SUPER + Return",         hl.dsp.exec_cmd("kitty --single-instance"))
 hl.bind("SUPER + SHIFT + Return", hl.dsp.exec_cmd("wezterm"))
 hl.bind("SUPER + X",  hl.dsp.exec_cmd("kitty"))
-hl.bind("SUPER + F3", hl.dsp.exec_cmd("thunar"))
+hl.bind("SUPER+F3", hl.dsp.exec_cmd("dolphin"))
 -- hl.bind("CTRL + SHIFT + P", hl.dsp.exec_cmd("walker"))
 hl.bind("CTRL + P", hl.dsp.exec_cmd("walker"))
 hl.bind("SUPER + period", hl.dsp.exec_cmd('killall rofi || rofi -show emoji -emoji-format "{emoji}" -modi emoji'))
@@ -206,11 +203,6 @@ hl.bind("SUPER + F",             hl.dsp.window.fullscreen({ mode = "fullscreen" 
 hl.bind("SUPER + SHIFT + Space", hl.dsp.window.float({ action = "toggle" }))
 -- hl.bind("SUPER + P", hl.dsp.window.pseudo()) -- dwindle
 hl.bind("SUPER + S", hl.dsp.layout("togglesplit")) -- dwindle
-
--- Screenshot
-hl.bind("SUPER + CTRL + Return", hl.dsp.exec_cmd("grim $(xdg-user-dir PICTURES)/Screenshots/$(date +'%s_grim.png')"))
-hl.bind("CTRL + Print",          hl.dsp.exec_cmd("grim -g \"$(slurp -o)\" $(xdg-user-dir PICTURES)/Screenshots/$(date +'%s_grim.png')"))
-hl.bind("CTRL + SHIFT + Print",  hl.dsp.exec_cmd("grim -g \"$(slurp)\" $(xdg-user-dir PICTURES)/Screenshots/$(date +'%s_grim.png')"))
 
 -- █▀▀ █▀█ █▀▀ █░█ █▀
 -- █▀░ █▄█ █▄▄ █▄█ ▄█

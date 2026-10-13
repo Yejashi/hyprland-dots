@@ -1,4 +1,5 @@
-config_file=~/.config/hypr/hyprland.conf
-keybinds=$(grep -oP '(?<=bind = ).*' $config_file)
-keybinds=$(echo "$keybinds" | sed 's/,\([^,]*\)$/ = \1/' | sed 's/, exec//g' | sed 's/^,//g')
-rofi -dmenu -p "Keybinds" -theme ~/.config/rofi/themes/catppuccin-mocha.rasi <<< "$keybinds"
+#!/usr/bin/env bash
+# List the active keybinds from hyprland.lua in rofi (dmenu mode).
+config_file="$HOME/.config/hypr/hyprland.lua"
+keybinds=$(grep -oP 'hl\.bind\("\K[^"]+' "$config_file")
+rofi -dmenu -p "Keybinds" -theme "$HOME/.config/rofi/catppuccin.rasi" <<< "$keybinds"

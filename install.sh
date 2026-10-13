@@ -18,6 +18,31 @@ DIRS=(hypr hyprpanel uwsm kitty rofi waybar wlogout ranger neofetch)
 
 mkdir -p "$CONFIG_DIR"
 
+# --- Requirements check -------------------------------------------------------
+required=(hyprland hyprlock hyprpanel rofi kitty grim slurp grimblast hyprpicker
+          walker elephant wpctl brightnessctl playerctl swaybg wlogout
+          nm-applet blueman-applet dbus-update-activation-environment)
+missing=()
+for b in "${required[@]}"; do
+    command -v "$b" >/dev/null 2>&1 || missing+=("$b")
+done
+if [[ ${#missing[@]} -gt 0 ]]; then
+    echo "warning: missing binaries (install them, e.g. via pacman):"
+    printf '  - %s\n' "${missing[@]}"
+fi
+
+# --- Fonts ---------------------------------------------------------------------
+# SF Pro Display is used by hyprlock; install it per-user if fontconfig
+# cannot resolve it. Additive only — never replaces system fonts.
+if ! fc-match "SF Pro Display" 2>/dev/null | grep -qi "SF Pro Display"; then
+    mkdir -p "$HOME/.local/share/fonts"
+    cp -n "$REPO/hypr/Fonts/SF Pro Display/"*.otf "$HOME/.local/share/fonts/"
+    fc-cache "$HOME/.local/share/fonts" >/dev/null 2>&1 || true
+    echo "ok      fonts (SF Pro Display installed per-user)"
+else
+    echo "ok      fonts (SF Pro Display already available)"
+fi
+
 for name in "${DIRS[@]}"; do
     src="$REPO/$name"
     dst="$CONFIG_DIR/$name"

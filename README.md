@@ -18,7 +18,7 @@ KDE Plasma — sessions are separate (SDDM: `Hyprland`, `Hyprland (uwsm)`,
 
 | Path | What it is |
 |---|---|
-| `hypr/` | Hyprland + hyprlock. **`hyprland.lua` is the live config** — Hyprland ≥ 0.55 loads Lua from `~/.config/hypr/hyprland.lua`; the old `hyprland.conf` syntax is deprecated and no longer read. `hyprlock.conf` is the lockscreen: `hyprlock.png` background, `profile_devil.png` avatar, `Fonts/` (SF Pro Display, JetBrains Mono Nerd), `Scripts/songdetail.sh` (current song on the lockscreen), `scripts/` (grimblast captures), `mocha.conf` (Catppuccin Mocha palette), `keybind` (rofi keybind dumper), `xdg-portal-hyprland` (portal fixup, run at startup). |
+| `hypr/` | Hyprland + hyprlock. **`hyprland.lua` is the live config** — Hyprland ≥ 0.55 loads Lua from `~/.config/hypr/hyprland.lua`; the old `hyprland.conf` syntax is deprecated and no longer read. `hyprlock.conf` is the lockscreen: `hyprlock.png` background, `profile_devil.png` avatar, `Fonts/` (SF Pro Display, JetBrains Mono Nerd), `scripts/songdetail.sh` (current song on the lockscreen), `scripts/kbd-backlight.sh` (Framework 13 keyboard backlight), `mocha.conf` (Catppuccin Mocha palette), `keybind` (rofi keybind dumper, parses `hyprland.lua`), `xdg-portal-hyprland` (portal fixup, run at startup). |
 | `hyprpanel/` | Hyprpanel — the active panel (bar, OSD, menus, notifications). |
 | `uwsm/` | Env vars for the `hyprland-uwsm.desktop` session. |
 | `kitty/` | Kitty terminal + kitty-themes. |
@@ -39,12 +39,34 @@ git clone git@github.com:Yejashi/hyprland-dots.git
 
 The installer symlinks each directory into `~/.config`, backing up any
 existing directory as `<name>.bak-<timestamp>` before replacing it. Re-run
-it any time after pulling updates.
+it any time after pulling updates. It also:
+
+- checks for the binaries the configs call and warns about any that are
+  missing (see Requirements below), and
+- installs **SF Pro Display** (used by hyprlock) into
+  `~/.local/share/fonts` if fontconfig cannot resolve it — per-user and
+  additive, never touches system fonts.
+
+## Requirements
+
+Binaries (all in the official repos): `hyprland` (≥ 0.55, for the Lua
+config), `hyprlock`, `hyprpanel`, `rofi`, `kitty`, `grim`, `slurp`,
+`grimblast`, `hyprpicker`, `walker`, `elephant`, `wpctl`, `brightnessctl`,
+`playerctl`, `swaybg`, `wlogout`, `nm-applet`, `blueman-applet`,
+`dbus-update-activation-environment`.
+
+Fonts: **SF Pro Display** (hyprlock) — installed per-user by `install.sh`;
+**JetBrains Mono Nerd Font** (kitty, rofi) — expected system-wide.
 
 ## Notes
 
 - **Config is Lua**: edit `~/.config/hypr/hyprland.lua`, then reload the
   session (or `hyprctl reload`).
 - **Panel**: hyprpanel is started at session start; waybar is not running.
+- **Weather key**: the OpenWeatherMap key was removed from the committed
+  `hyprpanel/config.json` (repo is public). Weather is disabled; if you
+  re-enable it, enter the key via hyprpanel's UI.
+- **Screenshots**: `Print` (active window), `ALT+Print` (whole screen),
+  `CTRL+Print` (region) — all via `grimblast` with notifications.
 - **Session switching**: log in via SDDM into `Hyprland`, `Hyprland (uwsm)`
   or `Plasma` — the desktops don't share state.
